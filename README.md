@@ -8,6 +8,7 @@ Check mongodb server already running on your device.
 2. go to folder : `cd my-todo-list-backend`
 3. install all dependencies : `npm install`
 4. create .env on folder and insert `DB_URI_Local=<your-db-server>`.
+5. start project : `nodemon index.js`
 
 # Todo Schema
 
