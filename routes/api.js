@@ -69,7 +69,7 @@ router.post('/todos/update/:id', (req, res, next) => {
         let id = ObjectId(req.params.id);
         let data = req.body;
         // res.send(data);
-        database.mongo_update(db,collection,data,id).then(function(response){
+        database.mongo_update_one(db,collection,data,id).then(function(response){
                 res.json(response);
                 console.info(response);
             }, function(err) {
@@ -84,9 +84,17 @@ router.post('/todos/update/:id', (req, res, next) => {
   });
 
 router.delete('/todos/delete/:id', (req, res, next) => {
-  Todo.findOneAndDelete({"_id": req.params.id})
-    .then(data => res.json(data))
-    .catch(next)
+        let db = "my-db";
+        let collection = "todo";
+        let id = ObjectId(req.params.id);
+
+        database.mongo_delete_one(db,collection,id).then(function(response){
+                res.json(response);
+                console.info(response);
+            }, function(err) {
+                res.status(400).send(err.errmsg);
+                console.error('The promise was rejected', err, err.stack);
+        })
 })
 
 module.exports = router;
