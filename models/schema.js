@@ -5,7 +5,6 @@ function todo(db){
         bsonType: "object", 
         required: [
             "description", 
-            "subject",
             "username",
         ], 
         properties: { 
