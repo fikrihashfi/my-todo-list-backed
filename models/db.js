@@ -1,10 +1,11 @@
 var MongoClient = require('mongodb').MongoClient;
 require('dotenv').config();
-var url = process.env.DB_URI_Local;
+var uri = process.env.DB_URI_Local;
 const schema = require('./schema');
+const db = new MongoClient(uri, { useUnifiedTopology: true, useNewUrlParser: true });
 
 function create_db_collection(){
-    MongoClient.connect(url, function(err, db) {
+    db.connect( err => {
       if (err) {
         db.close();
         reject(err);  
@@ -17,7 +18,7 @@ function create_db_collection(){
 
 function mongo_query(database, col, query) {
       return new Promise(function(resolve, reject) {
-        MongoClient.connect(url, function(err, db) {
+        db.connect( err => {
           if (err) {
             db.close();
             reject(err);  
@@ -42,14 +43,14 @@ function mongo_query(database, col, query) {
 
 function mongo_insert_one(database, col, data) {
     return new Promise(function(resolve, reject) {
-      MongoClient.connect(url, function(err, db) {
+      db.connect( err => {
         if (err) {
           db.close();
           reject(err);  
         } else {
           var dbo = db.db(database);
           var collection = dbo.collection(col);
-          
+
           collection.insertOne(data).then((result)=> {
             console.log(err);
             db.close();
@@ -64,5 +65,33 @@ function mongo_insert_one(database, col, data) {
     });
 }
 
+function mongo_update(database, col, data, id) {
+  return new Promise(function(resolve, reject) {
+    db.connect(err => {
+      if (err) {
+        db.close();
+        reject(err);  
+      } else {
+        var dbo = db.db(database);
+        var collection = dbo.collection(col);
+        var newData = data;
+        console.log(newData);
+        collection.updateOne(
+          { "_id":id },
+          { $set: newData}
+        ).then((result)=> {
+          console.log(err);
+          db.close();
+          resolve(result) 
+        }).catch((err)=>
+        {console.log(err);
+        db.close();
+        reject(err)
+        });
+      }   
+    });
+  });
+}
 
-module.exports = {mongo_query, mongo_insert_one, create_db_collection}; 
+
+module.exports = {mongo_query, mongo_insert_one, create_db_collection, mongo_update}; 

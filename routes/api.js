@@ -47,11 +47,11 @@ router.post('/todos/add', (req, res, next) => {
         completed: req.body.completed
     };
     // res.send(data);
-    database.mongo_insert_one(db,collection,data).then(function(items){
-            res.json(items);
-            console.info(items);
+    database.mongo_insert_one(db,collection,data).then(function(response){
+            res.json(response);
+            console.info(response);
         }, function(err) {
-            res.status(400).send("db error");
+            res.status(400).send(err.errmsg);
             console.error('The promise was rejected', err, err.stack);
     })
   }else {
@@ -62,29 +62,25 @@ router.post('/todos/add', (req, res, next) => {
 });
 
 router.post('/todos/update/:id', (req, res, next) => {
-    if(req.body.action){
-        Todo.findById(req.params.id,function(err, todo){
-            if(!todo) res.status(404).send("Data not found!");
-            else{
-                todo.description =  req.body.description;
-                todo.subject =  req.body.subject;
-                todo.username =  req.body.username;
-                todo.priority =  req.body.priority;
-                todo.time =  req.body.time;
-                todo.completed =  req.body.completed;
-
-                todo.save().then(todo=>{
-                    res.json('Success update todo!');
-                }).catch(err=>{
-                    res.status(400).send("Update failed");
-                })
-            }
+  
+    if(Object.keys(req.body).length !== 0){
+        let db = "my-db";
+        let collection = "todo";
+        let id = ObjectId(req.params.id);
+        let data = req.body;
+        // res.send(data);
+        database.mongo_update(db,collection,data,id).then(function(response){
+                res.json(response);
+                console.info(response);
+            }, function(err) {
+                res.status(400).send(err.errmsg);
+                console.error('The promise was rejected', err, err.stack);
         })
-    }else {
-      res.json({
-        error: "The input field is empty"
-      })
-    }
+      }else {
+        res.json({
+          error: "The input field is empty"
+        })
+      }
   });
 
 router.delete('/todos/delete/:id', (req, res, next) => {

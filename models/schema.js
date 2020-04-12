@@ -3,29 +3,18 @@ function todo(db){
     db.createCollection( "todo" , { 
         validator: { $jsonSchema: { 
         bsonType: "object", 
-        required: [ 
+        required: [
+            "description", 
             "subject",
             "username",
-            "priority",
-            "time",
-            "completed"
         ], 
         properties: { 
-            subject: { 
+            description:{
                 bsonType: "string", 
                 description: "required and must be a string" }, 
             username: { 
                 bsonType: "string", 
                 description: "required and must be a string" }, 
-            priority: { 
-                bsonType: "string", 
-                description: "required and must be a string" }, 
-            time: { 
-                bsonType: "string", 
-                description: "required and must be string" }, 
-            completed: { 
-                bsonType: "bool", 
-                description: "can be only true or false" } 
         }
         }
     },   
