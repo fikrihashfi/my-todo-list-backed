@@ -1,14 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 const routes = require('./routes/api');
 const path = require('path');
+const db = require('./models/db');
 require('dotenv').config();
+
 
 const app = express();
 
 const port = process.env.PORT || 5000;
 
+db.create_db_collection();
 // mongoose.connect(process.env.DB_URI_Local, { useNewUrlParser: true })
 //   .then(() => {
 //     console.log(`Database connected successfully`)

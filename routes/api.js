@@ -35,7 +35,8 @@ router.get('/todos', (req, res, next) => {
 });
 
 router.post('/todos/add', (req, res, next) => {
-  if(req.body.action){
+
+  if(Object.keys(req.body).length !== 0){
     let db = "admin";
     let collection = "todo";
     let data = { description: req.body.description,
@@ -45,7 +46,7 @@ router.post('/todos/add', (req, res, next) => {
         time: req.body.time,
         completed: req.body.completed
     };
-    
+    // res.send(data);
     database.mongo_insert_one(db,collection,data).then(function(items){
             res.json(items);
             console.info(items);

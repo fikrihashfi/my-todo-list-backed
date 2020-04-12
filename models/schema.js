@@ -24,11 +24,13 @@ function todo(db){
                 bsonType: "string", 
                 description: "required and must be string" }, 
             completed: { 
-                bsonType: "boolean", 
+                bsonType: "bool", 
                 description: "can be only true or false" } 
         }
         }
-    }})
+    },   
+    validationLevel: "moderate"
+})
 }
 
 module.exports = {todo}
