@@ -8,7 +8,7 @@ function create_db_collection(){
     db.connect( err => {
       if (err) {
         db.close();
-        reject(err);  
+        console.log(err);  
       } else {
         let dbo = db.db("my-db");
         schema.todo(dbo);
