@@ -49,7 +49,7 @@ example insertion data body:
 # Delete
 <your_base_url>/api/todos/delete/:id (delete method)
 
-
+*Note : if dependencies not fully installed try to delete package-lock.json
 
 
 
