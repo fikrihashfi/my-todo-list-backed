@@ -28,15 +28,19 @@ Check mongodb server already running on your device.
    
 # get
 <your_base_url>/api/todos (get method)
+
 <your_base_url>/api/todos/:id (get method)
 
 # Insert
 <your_base_url>/api/todos/add (post method)
+
 example insertion data body:
+
 {"description":"todo api","subject":"Make todo api","username":"fikrihashfi","priority":"low","time":"2020-02-02","completed":false}
 
 # Update
 <your_base_url>/api/todos/update/:id (post method)
+
 {"description":"todo","username":"fikrihashfi","priority":"high","time":"2020-01-01","completed":false}
 
 # Delete
