@@ -6,7 +6,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 
 router.get('/todos/:id', (req, res, next) => {
-    let db = "admin";
+    let db = "my-db";
     let collection = "todo";
     let db_query = {_id:ObjectId(req.params.id)};
     
@@ -20,7 +20,7 @@ router.get('/todos/:id', (req, res, next) => {
 })
 
 router.get('/todos', (req, res, next) => {
-    let db = "admin";
+    let db = "my-db";
     let collection = "todo";
     let db_query = {};
     
@@ -37,7 +37,7 @@ router.get('/todos', (req, res, next) => {
 router.post('/todos/add', (req, res, next) => {
 
   if(Object.keys(req.body).length !== 0){
-    let db = "admin";
+    let db = "my-db";
     let collection = "todo";
     let data = { description: req.body.description,
         subject: req.body.subject,

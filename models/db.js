@@ -48,11 +48,10 @@ function mongo_insert_one(database, col, data) {
           reject(err);  
         } else {
           var dbo = db.db(database);
-          
-          schema.todo(dbo);
           var collection = dbo.collection(col);
+          
           collection.insertOne(data).then((result)=> {
-              console.log(err);
+            console.log(err);
             db.close();
             resolve(result) 
           }).catch((err)=>
