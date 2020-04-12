@@ -1,7 +1,7 @@
 # my-todo-list-backed
 simple todo-list-api (Work In Progress)
 
-# installation
+# Installation
 Check mongodb server already running on your device. 
 
 1. Install all dependencies : `npm install`
@@ -26,7 +26,7 @@ Check mongodb server already running on your device.
         }
     }
    
-# get
+# Get
 <your_base_url>/api/todos (get method)
 
 <your_base_url>/api/todos/:id (get method)
