@@ -4,8 +4,10 @@ simple todo-list-api (Work In Progress)
 # Installation
 Check mongodb server already running on your device. 
 
-1. Install all dependencies : `npm install`
-2. create .env on folder. and insert `DB_URI_Local=<your-db-server>` to your env.
+1. clone git repository : `git clone https://github.com/fikrihashfi/my-todo-list-backed.git`
+2. go to folder : `cd my-todo-list-backend`
+3. install all dependencies : `npm install`
+4. create .env on folder and insert `DB_URI_Local=<your-db-server>`.
 
 # Todo Schema
 
